@@ -28,4 +28,3 @@ build:
       
       echo "==========RUNNING CUCUMBER FEATURES=========="
       CASSANDRA_VERSION=$CASSANDRA_VERSION time bundle exec rake cucumber
-      
