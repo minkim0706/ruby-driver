@@ -1,0 +1,31 @@
+ruby:
+  - 2.2
+os:
+  - ubuntu/trusty64
+env:
+  CASSANDRA_VERSION:
+    - 1.2.19
+    - 2.0.16
+    - 2.1.8
+  JDK:
+    - java-7-oracle
+build:
+  - script: |
+      export JAVA_HOME=/usr/lib/jvm/$JDK
+      export PATH=$JAVA_HOME/bin:$PATH
+  
+      # Install dependencies
+	  bundle install
+      
+      # Compile C extensions
+      rake compile
+      
+	  echo "==========RUNNING UNIT TESTS==========="
+	  CASSANDRA_VERSION=$CASSANDRA_VERSION time bundle exec rake rspec
+
+      echo "==========RUNNING INTEGRATION TESTS=========="
+      CASSANDRA_VERSION=$CASSANDRA_VERSION time bundle exec rake integration
+      
+      echo "==========RUNNING CUCUMBER FEATURES=========="
+      CASSANDRA_VERSION=$CASSANDRA_VERSION time bundle exec rake cucumber
+      
