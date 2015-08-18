@@ -15,13 +15,13 @@ build:
       export PATH=$JAVA_HOME/bin:$PATH
   
       # Install dependencies
-	  bundle install
+      bundle install
       
       # Compile C extensions
       rake compile
       
-	  echo "==========RUNNING UNIT TESTS==========="
-	  CASSANDRA_VERSION=$CASSANDRA_VERSION time bundle exec rake rspec
+      echo "==========RUNNING UNIT TESTS==========="
+      CASSANDRA_VERSION=$CASSANDRA_VERSION time bundle exec rake rspec
 
       echo "==========RUNNING INTEGRATION TESTS=========="
       CASSANDRA_VERSION=$CASSANDRA_VERSION time bundle exec rake integration
